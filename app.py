@@ -20,6 +20,20 @@ if st.checkbox("Show raw data"):
     st.dataframe(data)
 
 
+st.subheader("Top 100 company by average ranking")
+top_df = (
+    data.groupby("Company")
+    .agg(
+        appearances=pd.NamedAgg(column="Year", aggfunc="count"),
+        avg_ranking=pd.NamedAgg(column="Ranking", aggfunc="mean"),
+    )
+    .sort_values(by=["appearances", "avg_ranking"], ascending=[False, True])
+    .head(100)
+)
+st.dataframe(top_df)
+
+st.subheader("Explore by company")
+
 company = st.selectbox("Search by company name", sorted(data.Company.unique()))
 
 company_df = data.loc[data["Company"] == company].sort_values(by=["Year"])
