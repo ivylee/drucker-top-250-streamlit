@@ -4,6 +4,8 @@ import plotly.express as px
 import streamlit as st
 
 
+st.set_page_config(page_title="Drucker Top 250")
+
 st.title("Drucker Institute Company Ranking Top 250 (2017-2024)")
 
 
